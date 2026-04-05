@@ -10,14 +10,15 @@
 
     <div class="envelope-container" id="envelopeContainer">
         
-        <video id="introVideo" class="intro-video" playsinline>
-            <source src="intro.mp4" type="video/mp4"> Your browser does not support the video tag.
+        <video id="introVideo" class="intro-video" playsinline preload="auto" poster="poster.jpeg">
+            <source src="intro.mp4" type="video/mp4"> 
+            Your browser does not support the video tag.
         </video>
 
         <div class="invitation-card" id="invitationCard">
             
             <section class="screen couple-screen">
-                <video autoplay muted loop class="background-video">
+                <video autoplay muted loop playsinline class="background-video">
                     <source src="couple.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
