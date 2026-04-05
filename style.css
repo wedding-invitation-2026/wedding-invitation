@@ -8,7 +8,7 @@
 
 @font-face {
     font-family: 'Diwani Letter';
-    src: url('font/Diwani Letter.ttf') format('truetype'); /* Put your actual font file name here */
+    src: url('Diwani Letter.ttf') format('truetype'); /* Put your actual font file name here */
     font-weight: normal;
     font-style: normal;
 }
