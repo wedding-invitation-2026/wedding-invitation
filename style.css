@@ -218,13 +218,13 @@ body, html {
         transform: scale(1.05) translateY(0); /* Stays still for 4 seconds */
     }
     85% {
-        transform: scale(1.05) translateY(-15px); /* Jumps up */
+        transform: scale(1.05) translateY(-55px); /* Jumps up */
     }
     90% {
         transform: scale(1.05) translateY(0); /* Hits the ground */
     }
     95% {
-        transform: scale(1.05) translateY(-7px); /* Small secondary bounce */
+        transform: scale(1.05) translateY(-25px); /* Small secondary bounce */
     }
 }
 
