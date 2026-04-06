@@ -7,11 +7,13 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+a
     <div class="envelope-container" id="envelopeContainer">
 
-        <audio id="bgMusic" loop>
-            <source src="song.mp3" type="audio/mpeg"> 
+        <audio id="bgMusic" loop playsinline preload="auto" cross-origin="anonymous">
+            <source src="song.mp3" type="audio/mpeg">
+            <source src="song.ogg" type="audio/ogg">
+            <source src="song.wav" type="audio/wav">
         </audio>
         
         <video id="introVideo" class="intro-video" playsinline preload="auto" poster="poster.jpeg">

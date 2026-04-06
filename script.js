@@ -3,9 +3,22 @@ const introVideo = document.getElementById('introVideo');
 const bgMusic = document.getElementById('bgMusic'); // <-- Add this to grab the audio file
 
 // 1. Play the video when the user clicks/taps anywhere on it
-introVideo.addEventListener('click', () => {
-    introVideo.play();
-    bgMusic.play();
+introVideo.addEventListener('click', async () => {
+    try {
+        await introVideo.play();
+        // Play audio after video starts
+        const audioPromise = bgMusic.play();
+        if (audioPromise !== undefined) {
+            audioPromise.catch(error => {
+                console.warn('Audio playback failed:', error);
+                // Retry audio playback
+                bgMusic.muted = false;
+                bgMusic.play().catch(e => console.warn('Audio retry failed:', e));
+            });
+        }
+    } catch (error) {
+        console.error('Video playback failed:', error);
+    }
 });
 
 // 2. When the video reaches the end, slide up the invitation card
