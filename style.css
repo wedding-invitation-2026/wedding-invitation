@@ -215,16 +215,16 @@ body, html {
 /* The up and down bounce animation */
 @keyframes scrollHintBounce {
     0%, 80%, 100% {
-        transform: scale(1.05) translateY(0); /* Stays still for 4 seconds */
+        transform: translateY(0); /* Stays still for 4 seconds */
     }
     85% {
-        transform: scale(1.05) translateY(-55px); /* Jumps up */
+        transform: translateY(-55px); /* Jumps up */
     }
     90% {
-        transform: scale(1.05) translateY(0); /* Hits the ground */
+        transform: translateY(0); /* Hits the ground */
     }
     95% {
-        transform: scale(1.05) translateY(-25px); /* Small secondary bounce */
+        transform: translateY(-25px); /* Small secondary bounce */
     }
 }
 
@@ -239,7 +239,6 @@ body, html {
     z-index: -1; /* Keeps it behind the text */
     
     /* Apply the bounce effect */
-    transform: scale(1.05); /* Hides the gaps during the bounce */
     animation: scrollHintBounce 5s infinite; /* Runs every 5 seconds forever */
 }
 
