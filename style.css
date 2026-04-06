@@ -213,7 +213,7 @@ body, html {
 /* Details Screen */
 .content {
     color: #8b7355; /* Elegant Gold/Brown */
-    padding: 40px 20px;
+    padding: 40px 20px 0;
     width: 100%;
     z-index: 2;
 }
@@ -251,7 +251,6 @@ body, html {
 .info-grid {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     margin: 40px 0;
     border-top: 1px solid #d4c2a5;
     border-bottom: 1px solid #d4c2a5;
@@ -282,7 +281,7 @@ body, html {
 }
 
 .whish-logo {
-    width: 180px;
+    width: 220px;
 }
 
 .registry {
