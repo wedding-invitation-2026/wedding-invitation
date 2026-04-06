@@ -2,30 +2,22 @@ const envelopeContainer = document.getElementById('envelopeContainer');
 const introVideo = document.getElementById('introVideo');
 const bgMusic = document.getElementById('bgMusic'); // <-- Add this to grab the audio file
 
-// 1. Play the video when the user clicks/taps anywhere on it
-introVideo.addEventListener('click', async () => {
-    try {
-        await introVideo.play();
-        // Play audio after video starts
-        const audioPromise = bgMusic.play();
-        if (audioPromise !== undefined) {
-            audioPromise.catch(error => {
-                console.warn('Audio playback failed:', error);
-                // Retry audio playback
-                bgMusic.muted = false;
-                bgMusic.play().catch(e => console.warn('Audio retry failed:', e));
-            });
-        }
-    } catch (error) {
-        console.error('Video playback failed:', error);
-    }
-});
+function startExperience() {
+    // Force iOS to recognize and load the audio first
+    bgMusic.load(); 
+    
+    // Play both
+    bgMusic.play();
+    introVideo.play();
+}
 
-// 2. When the video reaches the end, slide up the invitation card
+// Listen for BOTH standard clicks and mobile screen taps
+introVideo.addEventListener('click', startExperience);
+introVideo.addEventListener('touchstart', startExperience, { once: true });
+
+// When the video reaches the end, slide up the invitation card
 introVideo.onended = function() {
     envelopeContainer.classList.add('open');
-    
-    // Allow the user to scroll through the rest of the invitation
     document.body.style.overflow = 'auto';
 };
 
