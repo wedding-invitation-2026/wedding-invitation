@@ -27,7 +27,9 @@ function startExperience() {
 }
 
 // Use a single user gesture (more reliable on iOS)
-window.addEventListener('click', startExperience, { once: true });
+window.addEventListener('click', startExperience);
+introVideo.addEventListener('click', startExperience);
+envelopeContainer.addEventListener('click', startExperience);
 
 // Fallback: retry when tab becomes active (iOS workaround)
 document.addEventListener('visibilitychange', () => {
