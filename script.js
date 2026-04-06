@@ -1,27 +1,44 @@
 const envelopeContainer = document.getElementById('envelopeContainer');
 const introVideo = document.getElementById('introVideo');
-const bgMusic = document.getElementById('bgMusic'); 
+const bgMusic = document.getElementById('bgMusic');
 
 let hasStarted = false;
 
 function startExperience() {
-    // If it already started, don't try to start it again
-    if (hasStarted) return; 
-    
-    // Force the volume up and play
+    if (hasStarted) return;
+    hasStarted = true;
+
+    // Ensure volume is set
     bgMusic.volume = 1.0;
-    bgMusic.play();
-    introVideo.play();
-    
-    hasStarted = true; // Mark as started
+
+    // Try playing audio (handle iOS promise)
+    const playAudio = bgMusic.play();
+    if (playAudio !== undefined) {
+        playAudio.catch(err => {
+            console.log('Audio play failed:', err);
+        });
+    }
+
+    // Play video
+    const playVideo = introVideo.play();
+    if (playVideo !== undefined) {
+        playVideo.catch(() => {});
+    }
 }
 
-// Attach the listener to the ENTIRE window, not just the video
-window.addEventListener('click', startExperience);
-window.addEventListener('touchstart', startExperience);
+// Use a single user gesture (more reliable on iOS)
+window.addEventListener('click', startExperience, { once: true });
 
-// When the video reaches the end, slide up the invitation card
-introVideo.onended = function() {
+// Fallback: retry when tab becomes active (iOS workaround)
+document.addEventListener('visibilitychange', () => {
+    if (!hasStarted) return;
+    if (bgMusic.paused) {
+        bgMusic.play().catch(() => {});
+    }
+});
+
+// When video ends, open invitation
+introVideo.onended = function () {
     envelopeContainer.classList.add('open');
     document.body.style.overflow = 'auto';
 };
