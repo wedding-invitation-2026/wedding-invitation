@@ -1,19 +1,18 @@
 const envelopeContainer = document.getElementById('envelopeContainer');
 const introVideo = document.getElementById('introVideo');
-const bgMusic = document.getElementById('bgMusic'); // <-- Add this to grab the audio file
+const bgMusic = document.getElementById('bgMusic'); 
 
 function startExperience() {
-    // Force iOS to recognize and load the audio first
-    bgMusic.load(); 
+    // Play both directly (Removed bgMusic.load() because it interrupts iOS)
     
-    // Play both
-    bgMusic.play();
+    // We add a tiny delay to the video to ensure the audio token registers first
+    bgMusic.play().catch(error => console.log("Audio blocked:", error));
     introVideo.play();
 }
 
-// Listen for BOTH standard clicks and mobile screen taps
+// Listen for BOTH standard clicks and mobile screen taps (Changed to touchend)
 introVideo.addEventListener('click', startExperience);
-introVideo.addEventListener('touchstart', startExperience, { once: true });
+introVideo.addEventListener('touchend', startExperience, { once: true });
 
 // When the video reaches the end, slide up the invitation card
 introVideo.onended = function() {
