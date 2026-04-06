@@ -191,6 +191,8 @@ body, html {
     color: #ffffff;
     text-shadow: 0 0 18px rgba(0, 0, 0, 0.7);
     padding: 0 20px;
+
+    
 }
 
 .couple-screen {
@@ -208,6 +210,37 @@ body, html {
     height: 100%;
     object-fit: cover;
     z-index: 1;
+}
+
+/* The up and down bounce animation */
+@keyframes scrollHintBounce {
+    0%, 80%, 100% {
+        transform: scale(1.05) translateY(0); /* Stays still for 4 seconds */
+    }
+    85% {
+        transform: scale(1.05) translateY(-15px); /* Jumps up */
+    }
+    90% {
+        transform: scale(1.05) translateY(0); /* Hits the ground */
+    }
+    95% {
+        transform: scale(1.05) translateY(-7px); /* Small secondary bounce */
+    }
+}
+
+/* Apply it to the couple video */
+.background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1; /* Keeps it behind the text */
+    
+    /* Apply the bounce effect */
+    transform: scale(1.05); /* Hides the gaps during the bounce */
+    animation: scrollHintBounce 5s infinite; /* Runs every 5 seconds forever */
 }
 
 /* Details Screen */
