@@ -1,7 +1,7 @@
 /* --- Custom Fonts Import --- */
 @font-face {
     font-family: 'Simplified Arabic Fixed';
-    src: url('Simplified Arabic.ttf') format('truetype'); /* Put your actual font file name here */
+    src: url('Simplified Arabic Fixed.ttf') format('truetype'); /* Put your actual font file name here */
     font-weight: normal;
     font-style: normal;
 }
