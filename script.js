@@ -4,41 +4,22 @@ const bgMusic = document.getElementById('bgMusic');
 
 let hasStarted = false;
 
-function startExperience() {
+function startExperience(event) {
+    // Prevent the event from firing twice (e.g., both touch and click)
     if (hasStarted) return;
     hasStarted = true;
 
-    // Ensure volume is set
+    // 1. Play the background music first
     bgMusic.volume = 1.0;
+    bgMusic.play().catch(err => console.log('Audio blocked:', err));
 
-    // 1. Play AUDIO FIRST (Crucial for iOS)
-    const playAudio = bgMusic.play();
-    if (playAudio !== undefined) {
-        playAudio.catch(err => {
-            console.log('Audio play failed:', err);
-            // If audio fails, allow the user to try tapping again
-            hasStarted = false; 
-        });
-    }
-
-    // 2. Play VIDEO SECOND
-    const playVideo = introVideo.play();
-    if (playVideo !== undefined) {
-        playVideo.catch(() => {});
-    }
+    // 2. Play the silent intro video
+    introVideo.play().catch(err => console.log('Video blocked:', err));
 }
 
-// The Magic iOS Fix: You MUST use 'touchstart' to unlock background audio!
-document.addEventListener('touchstart', startExperience, { once: true });
+// Apple prefers 'touchend' to verify a complete tap
+document.addEventListener('touchend', startExperience, { once: true });
 document.addEventListener('click', startExperience, { once: true });
-
-// Fallback: retry when tab becomes active (iOS workaround)
-document.addEventListener('visibilitychange', () => {
-    if (!hasStarted) return;
-    if (bgMusic.paused) {
-        bgMusic.play().catch(() => {});
-    }
-});
 
 // When video ends, open invitation
 introVideo.onended = function () {
