@@ -12,10 +12,19 @@
     <div class="envelope-container" id="envelopeContainer">
 
         <audio id="bgMusic" loop playsinline preload="auto">
-            <source src="song.mp3" type="audio/mpeg"> <source src="song.m4a" type="audio/mp4">
+            <source src="song.mp3" type="audio/mpeg"> 
+            <source src="song.m4a" type="audio/mp4">
         </audio>
-        
-        <video id="introVideo" class="intro-video" playsinline preload="auto" poster="poster.jpeg" muted>
+
+        <div class="envelope" id="startScreen">
+            <img src="poster.jpeg" alt="Start Screen" class="poster-bg">
+            <div class="start-text">
+                <p class="english-text">Click to Open the Invitation</p>
+                <p>إضغط لفتح الدعوة</p>
+            </div>
+        </div>
+
+        <video id="introVideo" class="intro-video" playsinline preload="auto" muted>
             <source src="intro.mp4" type="video/mp4"> 
             Your browser does not support the video tag.
         </video>

@@ -1,6 +1,7 @@
 const envelopeContainer = document.getElementById('envelopeContainer');
 const introVideo = document.getElementById('introVideo');
 const bgMusic = document.getElementById('bgMusic');
+const startScreen = document.getElementById('startScreen'); // Grab the new start screen
 
 let hasStarted = false;
 
@@ -8,6 +9,11 @@ function startExperience(event) {
     // Prevent the event from firing twice (e.g., both touch and click)
     if (hasStarted) return;
     hasStarted = true;
+
+    // Fade out the start screen overlay
+    if (startScreen) {
+        startScreen.classList.add('fade-out');
+    }
 
     // 1. Play the background music first
     bgMusic.volume = 1.0;
