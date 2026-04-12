@@ -11,25 +11,26 @@ function startExperience() {
     // Ensure volume is set
     bgMusic.volume = 1.0;
 
-    // Try playing audio (handle iOS promise)
+    // 1. Play AUDIO FIRST (Crucial for iOS)
     const playAudio = bgMusic.play();
     if (playAudio !== undefined) {
         playAudio.catch(err => {
             console.log('Audio play failed:', err);
+            // If audio fails, allow the user to try tapping again
+            hasStarted = false; 
         });
     }
 
-    // Play video
+    // 2. Play VIDEO SECOND
     const playVideo = introVideo.play();
     if (playVideo !== undefined) {
         playVideo.catch(() => {});
     }
 }
 
-// Use a single user gesture (more reliable on iOS)
-window.addEventListener('click', startExperience);
-introVideo.addEventListener('click', startExperience);
-envelopeContainer.addEventListener('click', startExperience);
+// The Magic iOS Fix: You MUST use 'touchstart' to unlock background audio!
+document.addEventListener('touchstart', startExperience, { once: true });
+document.addEventListener('click', startExperience, { once: true });
 
 // Fallback: retry when tab becomes active (iOS workaround)
 document.addEventListener('visibilitychange', () => {
