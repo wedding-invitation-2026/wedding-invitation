@@ -345,6 +345,7 @@ body, html {
 }
 
 .info-item {
+    font-family: 'Diwani Letter', serif;
     display: flex;
     flex-direction: column;
     font-size: 15px;
