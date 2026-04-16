@@ -2,8 +2,44 @@ const envelopeContainer = document.getElementById('envelopeContainer');
 const introVideo = document.getElementById('introVideo');
 const bgMusic = document.getElementById('bgMusic');
 const startScreen = document.getElementById('startScreen'); // Grab the new start screen
+const loader = document.getElementById('loader');
 
 let hasStarted = false;
+let videosLoaded = 0;
+const totalVideos = 2; // intro video + couple background video
+
+// Function to check if all videos are loaded and hide the loader
+function checkVideosLoaded() {
+    if (videosLoaded >= totalVideos && loader) {
+        setTimeout(() => {
+            loader.classList.add('hidden');
+        }, 500);
+    }
+}
+
+// Track when intro video is ready
+introVideo.addEventListener('canplay', function() {
+    videosLoaded++;
+    checkVideosLoaded();
+});
+
+// Track when couple background video is ready
+document.addEventListener('DOMContentLoaded', function() {
+    const coupleVideo = document.querySelector('.couple-screen video');
+    if (coupleVideo) {
+        coupleVideo.addEventListener('canplay', function() {
+            videosLoaded++;
+            checkVideosLoaded();
+        });
+    }
+});
+
+// Also hide loader after a timeout (in case videos don't load events fire)
+setTimeout(() => {
+    if (loader) {
+        loader.classList.add('hidden');
+    }
+}, 8000);
 
 function startExperience(event) {
     // Prevent the event from firing twice (e.g., both touch and click)
